@@ -2,14 +2,22 @@
   box-sizing: border-box;
 }
 
-html {
-  font-family: sans-serif;
-  background: rgb(49, 49, 49);
+html,
+body {
+  padding: 0;
+  padding-top: 10px;
+  margin: 0;
+  font-family: 'Roboto';
+  background: #666666;
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+  height: -webkit-fill-available;
 }
 
-body{
+/* body{
   margin: 0;
-  background-color: rgb(49, 49, 49);
+  background-color: #666666;
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -17,4 +25,4 @@ body{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
+} */

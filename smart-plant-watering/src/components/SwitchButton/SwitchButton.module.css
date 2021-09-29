@@ -4,6 +4,7 @@
     height: 60px;
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
 }
 .switch_button{
     position: relative;
@@ -19,7 +20,7 @@
 .slider{
     position: absolute;
     cursor:pointer;
-    background-color: rgb(110, 110, 110);
+    background-color: #d8f3dc;
     top:0;
     left:0;
     right:0;
@@ -30,7 +31,7 @@
     transition: background-color 500ms linear;
 }
 .slider.auto{
-    background-color: green;
+    background-color: #d8f3dc;
     transition: background-color 500ms linear;
 }
 
@@ -43,16 +44,16 @@
     width:50%;
     /* margin-left:3px;
     margin-top:6px; */
-    background-color: white;
+    background-color: #74c69d;
     border-radius: 6px;
     transition: 0.4s;
     align-items: center;
     justify-content: center;
-    color:rgb(110, 110, 110);
+    color: #000000;
 }
 .slider.auto:before{
     content:"AUTO";
-    color:green;
+    color: #FFFFFF;
 }
 input:checked + .slider:before{
     transform: translateX(90px);

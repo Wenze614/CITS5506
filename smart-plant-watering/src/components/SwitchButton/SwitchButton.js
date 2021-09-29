@@ -8,7 +8,7 @@ const SwitchButton = (props) =>{
                 <input type="checkbox" 
                     checked={props.isAuto} 
                     onChange={props.switchMode}/>
-                <span className={styles.slider}>
+                <span className={`${styles.slider} ${props.isAuto && styles.auto}`}>
                 </span>
             </label>
         </div>

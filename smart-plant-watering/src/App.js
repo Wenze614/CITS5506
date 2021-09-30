@@ -12,7 +12,7 @@ function App() {
   return (
     <>
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
-      <ChangeVariables/>
+      <ChangeVariables isAuto={isAuto}/>
       <WateringLog/>
     </>
   );

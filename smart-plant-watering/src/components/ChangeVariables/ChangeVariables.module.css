@@ -44,8 +44,17 @@ h3 {
     border-radius: 5px;
     font-size: 12px;
     margin-right: 5px;
+    outline: none;
 }
-
+.inputBox:focus{
+    border-color: #74c69d;
+    border-style: solid;
+}
+.inputBox.invalid:focus{
+    border-color: red;
+    border-style: solid;
+    background-color: #facec6;
+}
 .btn {
     background-color: #d8f3dc;
     border-radius: 5px;

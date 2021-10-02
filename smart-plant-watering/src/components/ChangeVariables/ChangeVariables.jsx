@@ -16,9 +16,12 @@ const ChangeVariables = (props) => {
         queryApi.queryRows(query, {
         next(row, tableMeta) {
             const o = tableMeta.toObject(row)
-            console.log(
-            `${o._time} ${o._measurement} in '${o.location}' (${o.example}): ${o._field}=${o._value}`
-            )
+            if(o._value!==0 && o._value!==100){
+                props.updateWateringLog(o._time,o._measurement,o._value)
+            }
+            // console.log(
+            // `${o._time} ${o._measurement} in '${o.location}' (${o.example}): ${o._field}=${o._value}`
+            // )
         },
         error(error) {
             console.error(error)

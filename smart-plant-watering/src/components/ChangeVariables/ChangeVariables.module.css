@@ -9,6 +9,9 @@
     position: relative;
 }
 
+.container.manual{
+    background-color: transparent;
+}
 .header {
     background-color: #74c69d;
     border: #d8f3dc 1px solid;
@@ -49,11 +52,12 @@ h3 {
 .inputBox:focus{
     border-color: #74c69d;
     border-style: solid;
+    background-color: #dcf5e9;
 }
 .inputBox.invalid:focus{
     border-color: red;
     border-style: solid;
-    background-color: #facec6;
+    background-color: #f8e8e5;
 }
 .btn {
     background-color: #d8f3dc;
@@ -65,5 +69,20 @@ h3 {
     border: none;
     width: 35%;
     color: rgb(110,110,110);
+    cursor: pointer;
+}
+
+.watering_button{
+    background-color: #74c69d;
+    border: #d8f3dc 1px solid;
+    border-radius: 50%;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 40%;
+    top: 20%;
+    text-align: center;
+    padding: 5px;
+    color: white;
     cursor: pointer;
 }

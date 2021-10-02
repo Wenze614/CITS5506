@@ -20,13 +20,16 @@ const ChangeVariables = (props) => {
             props.updateThreshold(temp_threshold)
         }else{
             setTemp_Threshold(props.threshold)
+            setIsValid(true)
         }
     }
-    return (
-        <div className={styles.container}>
+    return (  
+        <div className={`${styles.container} ${!props.isAuto && styles.manual}`}>
             <div className={styles.header}>
                 <h2>{props.isAuto? "Automatic Mode" : "Manual Mode"}</h2>
             </div>
+            { props.isAuto? 
+            <div>
             <h3>Water Moisture Threshold</h3>
             <form onSubmit={submitHandler}>
                 <input type="number" name="moistureThreshold" 
@@ -35,6 +38,9 @@ const ChangeVariables = (props) => {
                     className={`${styles.inputBox} ${!isValid && styles.invalid}`}/>
                 <input type="submit" value="Update" className={styles.btn} />
             </form>
+            </div>
+            : <button className={styles.watering_button}>WATERING NOW</button>
+            }
         </div>
     );
 };

@@ -12,7 +12,7 @@ const MoistureChart = (props) =>{
                         x:time,
                         y:value,
                         type:'scattergl',
-                        marker:{color:'red'},
+                        marker:{color:'#74c69d'},
                         name:'moisture'
                     }
                 ]}

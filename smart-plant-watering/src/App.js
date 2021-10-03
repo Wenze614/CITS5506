@@ -21,9 +21,10 @@ function App() {
   const updateWateringLog = (time, measurement,value) =>{
     setWateringLog(wateringLog=>{return [...wateringLog,{"time":time,"measurement":measurement,"value":value}]})
   }
+
   return (
     <>
-      <Header></Header>
+      <Header />
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
       <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
       <WateringLog wateringLog={wateringLog}/>

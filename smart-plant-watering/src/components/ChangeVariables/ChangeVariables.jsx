@@ -1,5 +1,7 @@
 import styles from "./ChangeVariables.module.css"
 import {useState} from "react"
+import WateringModal from "../Modals/WateringModal";
+
 const ChangeVariables = (props) => {
     const {InfluxDB} = require('@influxdata/influxdb-client')
 
@@ -55,6 +57,9 @@ const ChangeVariables = (props) => {
             setIsValid(true)
         }
     }
+
+    const [show, setShow] = useState(false)
+
     return (  
         <div className={`${styles.container} ${!props.isAuto && styles.manual}`}>
             <div className={styles.header}>
@@ -71,7 +76,12 @@ const ChangeVariables = (props) => {
                 <input type="submit" value="Update" className={styles.btn} />
             </form>
             </div>
-            : <button className={styles.watering_button} onClick={onClick}>WATERING NOW</button>
+            : 
+            <div>
+                <button className={styles.watering_button} onClick={onClick, () => setShow(true)}>WATERING NOW</button>
+                {/* <button onClick={() => setShow(true)}>Show Modal</button> */}
+                <WateringModal onClose={() => setShow(false)} show={show} />
+            </div>
             }
         </div>
     );

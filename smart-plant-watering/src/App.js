@@ -4,6 +4,8 @@ import {useState} from "react"
 import WateringLog from './components/WateringLog/WateringLog';
 import ChangeVariables from './components/ChangeVariables/ChangeVariables';
 import MoistureChart from './components/chart/MoistureChart';
+import Header from './components/Header/Header';
+
 function App() {
   const [isAuto, setIsAuto] = useState(true)
   const [threshold, setThreshold] = useState(45)
@@ -21,6 +23,7 @@ function App() {
   }
   return (
     <>
+      <Header></Header>
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
       <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
       <WateringLog wateringLog={wateringLog}/>

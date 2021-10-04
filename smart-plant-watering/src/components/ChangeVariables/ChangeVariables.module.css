@@ -11,7 +11,9 @@
 
 .container.manual{
     background-color: transparent;
+    margin-bottom: 70px;
 }
+
 .header {
     background-color: #74c69d;
     border: #d8f3dc 1px solid;
@@ -73,18 +75,22 @@ h3 {
     cursor: pointer;
 }
 
-.watering_button{
-    background-color: #74c69d;
-    border: #d8f3dc 1px solid;
+.wateringButton{
+    background-color: #A8BCBF;
+    border: none;
+    outline: 2px solid #C0D6D9;
+    outline-offset: -5px;
     border-radius: 50%;
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    left: 40%;
-    top: 20%;
-    text-align: center;
-    padding: 5px;
+    width: 125px;
+    height: 125px;
     color: white;
     cursor: pointer;
-    margin-top: 10px;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }

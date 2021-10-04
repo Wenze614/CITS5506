@@ -78,7 +78,7 @@ const ChangeVariables = (props) => {
             </div>
             : 
             <div>
-                <button className={styles.watering_button} onClick={onClick, () => setShow(true)}>WATERING NOW</button>
+                <button className={styles.wateringButton} onClick={onClick, () => setShow(true)}>WATER NOW</button>
                 {/* <button onClick={() => setShow(true)}>Show Modal</button> */}
                 <WateringModal onClose={() => setShow(false)} show={show} />
             </div>

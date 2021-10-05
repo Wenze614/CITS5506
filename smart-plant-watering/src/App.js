@@ -5,6 +5,7 @@ import WateringLog from './components/WateringLog/WateringLog';
 import ChangeVariables from './components/ChangeVariables/ChangeVariables';
 import MoistureChart from './components/chart/MoistureChart';
 import Header from './components/Header/Header';
+import AlertModal from './components/Modals/AlertModal';
 
 function App() {
   const [isAuto, setIsAuto] = useState(true)
@@ -29,6 +30,12 @@ function App() {
 
   const moistureLogExtraction = useCallback(() =>{
     clearmoistureLog()
+  },[])
+  const [show, setShow] = useState(false)
+
+//   const {InfluxDB} = require('@influxdata/influxdb-client')
+  useEffect(()=>{
+    const timer = setInterval(()=>{
     const {InfluxDB} = require('@influxdata/influxdb-client')
 
     // You can generate a Token from the "Tokens Tab" in the UI
@@ -57,8 +64,9 @@ function App() {
     complete() {
         console.log('\\nFinished SUCCESS')
     },
-  })
+  })})
   },[])
+
 
   useEffect(()=>{
     moistureLogExtraction();
@@ -77,9 +85,13 @@ function App() {
     <>
       <Header />
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
-      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updatemoistureLog={updatemoistureLog}/>
-      <WateringLog/>
-      <MoistureChart moistureLog={moistureLog}></MoistureChart>
+      {/* <div> */}
+        <button onClick={() => setShow(true)}>Show alert modal</button>
+        <AlertModal onClose={() => setShow(false)} show={show} />
+      {/* </div> */}
+      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
+      <WateringLog wateringLog={wateringLog}/>
+      <MoistureChart wateringLog={wateringLog}></MoistureChart>
     </>
   );
 }

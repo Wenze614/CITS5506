@@ -30,12 +30,6 @@ function App() {
 
   const moistureLogExtraction = useCallback(() =>{
     clearmoistureLog()
-  },[])
-  const [show, setShow] = useState(false)
-
-//   const {InfluxDB} = require('@influxdata/influxdb-client')
-  useEffect(()=>{
-    const timer = setInterval(()=>{
     const {InfluxDB} = require('@influxdata/influxdb-client')
 
     // You can generate a Token from the "Tokens Tab" in the UI
@@ -64,19 +58,23 @@ function App() {
     complete() {
         console.log('\\nFinished SUCCESS')
     },
-  })})
+  })
   },[])
 
+const [show, setShow] = useState(false)
 
-  useEffect(()=>{
+useEffect(()=>{
+  console.log("extracting data from useEffect 1")
+  moistureLogExtraction();
+},[])
+
+useEffect(()=>{
+  const timer = setTimeout(()=>{
+    console.log("extracting data from useEffect 2")
     moistureLogExtraction();
-  },[])
-  useEffect(()=>{
-    const timer = setTimeout(()=>{
-      moistureLogExtraction();
-    },30000);
-    return () => clearTimeout(timer)
-  },[moistureLogExtraction]);
+  },10000);
+  return () => clearTimeout(timer)
+});
 
 
 
@@ -89,9 +87,9 @@ function App() {
         <button onClick={() => setShow(true)}>Show alert modal</button>
         <AlertModal onClose={() => setShow(false)} show={show} />
       {/* </div> */}
-      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
-      <WateringLog wateringLog={wateringLog}/>
-      <MoistureChart wateringLog={wateringLog}></MoistureChart>
+      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} />
+      <WateringLog />
+      <MoistureChart moistureLog={moistureLog}></MoistureChart>
     </>
   );
 }

@@ -11,17 +11,23 @@
     z-index:1;
 }
 
-.modalContent {
+.modalContent,
+.modalContentAlert {
     width: 95%;
     height: 120px;
-    background-color: #C0D6D9;
-    border: 2px solid #A8BCBF ;
+    background-color: #c0d6d9;
+    border: 2px solid #a8bcbf;
     border-radius: 10px;
 }
 
-.modalHeader {
-    background-color: #C0D6D9;
-    border: 2px solid #A8BCBF ;
+.modalContentAlert {
+    height: 140px;
+}
+
+.modalHeader,
+.modalHeaderAlert {
+    background-color: #c0d6d9;
+    border: 2px solid #a8bcbf;
     border-radius: 5px;
     position: relative;
     width: 50%;
@@ -31,7 +37,15 @@
     padding: 5px;
 }
 
-.modalHeader h2 {
+.modalContentAlert,
+.modalHeaderAlert {
+    background-color: #fe8472;
+    border: 2px solid #fe6148;
+    color: #ffffff;
+}
+
+.modalHeader h2,
+.modalHeaderAlert h2 {
     font-size: 18px;
     font-weight: bold;
     letter-spacing: 2px;
@@ -44,6 +58,11 @@
     text-align: center;
     align-items: center;
     justify-content: center;
+    letter-spacing: 1.2px;
+}
+
+.modalContentAlert .modalBody p {
+    margin: 8px 0;
 }
 
 .closeBtn {
@@ -52,4 +71,8 @@
     position: relative;
     float: right;
     margin: 2px;
+}
+
+.modalContentAlert .closeBtn {
+    color: #ffffff;
 }

@@ -5,6 +5,7 @@ import WateringLog from './components/WateringLog/WateringLog';
 import ChangeVariables from './components/ChangeVariables/ChangeVariables';
 import MoistureChart from './components/chart/MoistureChart';
 import Header from './components/Header/Header';
+import AlertModal from './components/Modals/AlertModal';
 
 function App() {
   const [isAuto, setIsAuto] = useState(true)
@@ -22,6 +23,8 @@ function App() {
   const updateWateringLog = (time, measurement,value) =>{
     setWateringLog(wateringLog=>{return [...wateringLog,{"time":time,"measurement":measurement,"value":value}]})
   }
+
+  const [show, setShow] = useState(false)
 
 //   const {InfluxDB} = require('@influxdata/influxdb-client')
 
@@ -58,6 +61,10 @@ function App() {
     <>
       <Header />
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
+      {/* <div> */}
+        <button onClick={() => setShow(true)}>Show alert modal</button>
+        <AlertModal onClose={() => setShow(false)} show={show} />
+      {/* </div> */}
       <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
       <WateringLog wateringLog={wateringLog}/>
       <MoistureChart wateringLog={wateringLog}></MoistureChart>

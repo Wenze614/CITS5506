@@ -1,6 +1,5 @@
 import styles from "./SwitchButton.module.css"
 const SwitchButton = (props) =>{
-    console.log(props)
     return (
         <div className={styles.switch_section}>
             <label className={styles.switch_button}>

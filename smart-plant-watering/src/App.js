@@ -1,6 +1,6 @@
 import './App.css';
 import SwitchButton from './components/SwitchButton/SwitchButton';
-import {useState, useEffect} from "react"
+import {useState, useEffect, useCallback} from "react"
 import WateringLog from './components/WateringLog/WateringLog';
 import ChangeVariables from './components/ChangeVariables/ChangeVariables';
 import MoistureChart from './components/chart/MoistureChart';
@@ -9,7 +9,7 @@ import Header from './components/Header/Header';
 function App() {
   const [isAuto, setIsAuto] = useState(true)
   const [threshold, setThreshold] = useState(45)
-  const [wateringLog, setWateringLog] = useState([])
+  const [moistureLog, setmoistureLog] = useState([])
   
   const switchMode = () => {
     setIsAuto(isAuto=>{return !isAuto})
@@ -19,12 +19,16 @@ function App() {
     console.log("threshold updated to:" + new_threshold)
     setThreshold(new_threshold)
   }
-  const updateWateringLog = (time, measurement,value) =>{
-    setWateringLog(wateringLog=>{return [...wateringLog,{"time":time,"measurement":measurement,"value":value}]})
+  const updatemoistureLog = (time, measurement,value) =>{
+    setmoistureLog(moistureLog=>{return [...moistureLog,{"time":time,"measurement":measurement,"value":value}]})
   }
 
-  useEffect(()=>{
-    const timer = setInterval(()=>{
+  const clearmoistureLog = () =>{
+    setmoistureLog([])
+  }
+
+  const moistureLogExtraction = useCallback(() =>{
+    clearmoistureLog()
     const {InfluxDB} = require('@influxdata/influxdb-client')
 
     // You can generate a Token from the "Tokens Tab" in the UI
@@ -40,7 +44,7 @@ function App() {
         next(row, tableMeta) {
         const o = tableMeta.toObject(row)
         if(o._value!==0 && o._value!==100){
-            updateWateringLog(o._time,o._measurement,o._value)
+            updatemoistureLog(o._time,o._measurement,o._value)
         }
         // console.log(
         // `${o._time} ${o._measurement} in '${o.location}' (${o.example}): ${o._field}=${o._value}`
@@ -54,9 +58,17 @@ function App() {
         console.log('\\nFinished SUCCESS')
     },
   })
+  },[])
+
+  useEffect(()=>{
+    moistureLogExtraction();
+  },[])
+  useEffect(()=>{
+    const timer = setTimeout(()=>{
+      moistureLogExtraction();
     },30000);
-    return () => clearInterval(timer)
-  });
+    return () => clearTimeout(timer)
+  },[moistureLogExtraction]);
 
 
 
@@ -65,9 +77,9 @@ function App() {
     <>
       <Header />
       <SwitchButton isAuto={isAuto} switchMode={switchMode}/>
-      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updateWateringLog={updateWateringLog}/>
-      <WateringLog wateringLog={wateringLog}/>
-      <MoistureChart wateringLog={wateringLog}></MoistureChart>
+      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} updatemoistureLog={updatemoistureLog}/>
+      <WateringLog/>
+      <MoistureChart moistureLog={moistureLog}></MoistureChart>
     </>
   );
 }

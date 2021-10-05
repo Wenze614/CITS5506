@@ -30,27 +30,26 @@ const ChangeVariables = (props) => {
     const [show, setShow] = useState(false)
 
     return (  
-        <div className={`${styles.container} ${!props.isAuto && styles.manual}`}>
-            <div className={styles.header}>
-                <h2>{props.isAuto? "Automatic Mode" : "Manual Mode"}</h2>
-            </div>
+        <div>    
             { props.isAuto? 
-            <div>
-            <h3>Water Moisture Threshold</h3>
-            <form onSubmit={submitHandler}>
-                <input type="number" name="moistureThreshold" 
-                    value={temp_threshold} 
-                    onChange={changeTemp_Threshold} 
-                    className={`${styles.inputBox} ${!isValid && styles.invalid}`}/>
-                <input type="submit" value="Update" className={styles.btn} />
-            </form>
-            </div>
+                <div className={styles.autoContainer}>
+                    <div className={styles.header}>
+                        <h2>Automatic Mode</h2>
+                    </div>
+                    <h3>Water Moisture Threshold</h3>
+                    <form onSubmit={submitHandler}>
+                        <input type="number" name="moistureThreshold" 
+                            value={temp_threshold} 
+                            onChange={changeTemp_Threshold} 
+                            className={`${styles.inputBox} ${!isValid && styles.invalid}`}/>
+                        <input type="submit" value="Update" className={styles.btn} />
+                    </form>
+                </div>
             : 
-            <div>
-                <button className={styles.wateringButton} onClick={() => setShow(true)}>WATER NOW</button>
-                {/* <button onClick={() => setShow(true)}>Show Modal</button> */}
-                <WateringModal onClose={() => setShow(false)} show={show} />
-            </div>
+                <div className={styles.manualContainer}>
+                    <button className={styles.wateringButton} onClick={() => setShow(true)}>WATER NOW</button>
+                    <WateringModal onClose={() => setShow(false)} show={show} />
+                </div>
             }
         </div>
     );

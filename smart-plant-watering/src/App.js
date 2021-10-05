@@ -72,7 +72,7 @@ useEffect(()=>{
   const timer = setTimeout(()=>{
     console.log("extracting data from useEffect 2")
     moistureLogExtraction();
-  },10000);
+  },30000);
   return () => clearTimeout(timer)
 });
 

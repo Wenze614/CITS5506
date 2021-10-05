@@ -18,8 +18,8 @@ const MoistureChart = (props) =>{
                 ]}
                 layout={{
                     autosize: true,
-                    width: 344,
-                    height: 225
+                    width: 450,
+                    height: 250
                 }}
             >
 

@@ -8,7 +8,7 @@ class Config:
     WATERING_TIME = 1
     MOISTRUE_THRESHOLD = 40
     def __init__(self):
-        with open('config.json') as f:
+        with open('config.json', 'r') as f:
             d = json.load(f)
             self.INFLUX_TOKEN  = d['INFLUX_TOKEN']
             self.INFLUX_ORG    = d['INFLUX_ORG']
@@ -19,44 +19,73 @@ class Config:
             self.MOISTRUE_THRESHOLD = d['MOISTRUE_THRESHOLD']
     
     def update_INFLUX_TOKEN(self, TOKEN):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['INFLUX_TOKEN'] = TOKEN
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
     
     def update_INFLUX_ORG(self, ORG):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['INFLUX_ORG'] = ORG
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
 
     def update_INFLUX_BUCKET(self, BUCKET):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['INFLUX_BUCKET'] = BUCKET
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
 
     def update_INFLUX_URL(self, URL):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['INFLUX_URL'] = URL
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
     
     def update_CLIENT(self, CLIENT):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['CLIENT'] = CLIENT
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
     
     def update_WATERING_TIME(self, TIME):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['WATERING_TIME'] = TIME
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
     
     def update_MOISTRUE_THRESHOLD(self, THRESHOLD):
-        with open('config.json') as f:
+        d={}
+        with open('config.json', 'r') as f:
             d = json.load(f)
             d['MOISTRUE_THRESHOLD'] = THRESHOLD
+            f.close()
+        with open('config.json', 'w+') as f:
             json.dump(d, f)
+            f.close()
 
+Config().update_INFLUX_TOKEN('aaa')

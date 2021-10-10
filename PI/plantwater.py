@@ -24,12 +24,13 @@ if __name__ == "__main__":
         moisture = Moisture(channel=1)
         influx = Influx()
         pump = Pump()
+        configmod = Config()
         try:
             data, _time = moisture.get_moisture()
             influx.send_moisture(data, _time)
             have_water = water.water_level()
-            if have_water and data < Config.MOISTRUE_THRESHOLD:
-                pump.pump(Config.WATERING_TIME)
+            if have_water and data < configmod.MOISTRUE_THRESHOLD:
+                pump.pump(configmod.WATERING_TIME)
                 influx.send_pumped(1.0, _time)
             else:
                 influx.send_pumped(0.0, _time)

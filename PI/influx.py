@@ -12,11 +12,13 @@ class Influx:
     water_data    = 0
     pumped_data   = 0
     TIMEFORMAT    = "%Y-%m-%d %H:%M:%S.%f"
+
+    config = Config()
     
     def __init__(self):
         ''' Initionlize the influx database connection infromation
         '''
-        self.client = InfluxDBClient(url=Config.INFLUX_URL, token=Config.INFLUX_TOKEN)
+        self.client = InfluxDBClient(url=self.config.INFLUX_URL, token=self.config.INFLUX_TOKEN)
         self.write_api = self.client.write_api(write_options=SYNCHRONOUS)
     
     def send_moisture(self, measure, _time):
@@ -29,8 +31,8 @@ class Influx:
             if self.moisture_data > 0:
                 self._send_load('moisture.log', "Moisture","Moisture_percentage")
             
-            point = Point("Moisture").tag("Client", Config.CLIENT).field("Moisture_percentage", measure).time(_time, WritePrecision.NS)
-            self.write_api.write(Config.INFLUX_BUCKET, Config.INFLUX_ORG, point)
+            point = Point("Moisture").tag("Client", self.config.CLIENT).field("Moisture_percentage", measure).time(_time, WritePrecision.NS)
+            self.write_api.write(self.config.INFLUX_BUCKET, self.config.INFLUX_ORG, point)
             self.moisture_data = 0
         else:
             try:
@@ -50,8 +52,8 @@ class Influx:
             if self.water_data > 0:
                 self._send_load('water.log', "Water level","Water_level")
                 
-            point = Point("Water level").tag("Client", Config.CLIENT).field("Water_level", measure).time(_time, WritePrecision.NS)
-            self.write_api.write(Config.INFLUX_BUCKET, Config.INFLUX_ORG, point)
+            point = Point("Water level").tag("Client", self.config.CLIENT).field("Water_level", measure).time(_time, WritePrecision.NS)
+            self.write_api.write(self.config.INFLUX_BUCKET, self.config.INFLUX_ORG, point)
             self.water_data    = 0
         else:
             try:
@@ -71,8 +73,8 @@ class Influx:
             if self.pumped_data>0:
                 self._send_load('pump.log', "Water level","Water_level")
     
-            point = Point("Water pumped").tag("Client", Config.CLIENT).field("Pumped", measure).time(_time, WritePrecision.NS)
-            self.write_api.write(Config.INFLUX_BUCKET, Config.INFLUX_ORG, point)
+            point = Point("Water pumped").tag("Client", self.config.CLIENT).field("Pumped", measure).time(_time, WritePrecision.NS)
+            self.write_api.write(self.config.INFLUX_BUCKET, self.config.INFLUX_ORG, point)
             self.pumped_data   = 0
         else:
             try:
@@ -102,8 +104,8 @@ class Influx:
             with open(filename, 'r') as file:
                 for line in file:
                     measure, _time = line.strip().split(',')
-                    point = Point(measurement).tag("Client", Config.CLIENT).field(field, float(measure)).time(datetime.strptime(_time, self.TIMEFORMAT), WritePrecision.NS)
-                    self.write_api.write(Config.INFLUX_BUCKET, Config.INFLUX_ORG, point)
+                    point = Point(measurement).tag("Client", self.config.CLIENT).field(field, float(measure)).time(datetime.strptime(_time, self.TIMEFORMAT), WritePrecision.NS)
+                    self.write_api.write(self.config.INFLUX_BUCKET, self.config.INFLUX_ORG, point)
             os.remove(filename)
         except Exception as e:
                 print(e)
@@ -112,7 +114,3 @@ class Influx:
 #    flux = Influx()
 #    while True:
 #        flux._send_load('moisture.log', "Moisture","Moisture_percentage")
-
-    
-    
-        

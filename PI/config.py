@@ -87,5 +87,3 @@ class Config:
         with open('config.json', 'w+') as f:
             json.dump(d, f)
             f.close()
-
-Config().update_INFLUX_TOKEN('aaa')

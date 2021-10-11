@@ -44,7 +44,7 @@ function App() {
     queryApi.queryRows(query, {
         next(row, tableMeta) {
         const o = tableMeta.toObject(row)
-        if(o._value!==0 && o._value!==100){
+        if(o._measurement=="Moisture"){
             updatemoistureLog(o._time,o._measurement,o._value)
         }
         // console.log(
@@ -72,7 +72,7 @@ useEffect(()=>{
   const timer = setTimeout(()=>{
     console.log("extracting data from useEffect 2")
     moistureLogExtraction();
-  },30000);
+  },300000);
   return () => clearTimeout(timer)
 });
 

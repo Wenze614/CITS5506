@@ -57,7 +57,7 @@ function App() {
             updatemoistureLog(o._time,o._measurement,o._value)
         }
         else if(o._measurement==="Water pumped"){
-          updateWateringeLog(o._time,o._measurement)
+          updateWateringeLog(new Date(o._time),o._measurement)
         }
         // console.log(
         // `${o._time} ${o._measurement} in '${o.location}' (${o.example}): ${o._field}=${o._value}`
@@ -100,7 +100,7 @@ useEffect(()=>{
         <AlertModal onClose={() => setShow(false)} show={show} />
       {/* </div> */}
       <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} />
-      <WateringLog wateringLog={wateringLog} />
+      <WateringLog wateringLog={wateringLog.reverse().slice(0,10)} />
       <MoistureChart moistureLog={moistureLog}></MoistureChart>
     </>
   );

@@ -7,9 +7,9 @@ const WateringLog = (props) => {
                 <h2>Watering Log</h2>
             </div>
             <p>Water log content here</p>
-            {/* <ul>
-                {props.wateringLog.map(log=><li>{`${log.time}   ${log.measurement}   ${log.value}`}</li>)}
-            </ul> */}
+            <ul>
+                {props.wateringLog.slice(-10).map(log=><li>{`${Date(log.time)}  ${log.measurement}`}</li>)}
+            </ul>
         </div>
     );
 };

@@ -11,7 +11,8 @@ function App() {
   const [isAuto, setIsAuto] = useState(true)
   const [threshold, setThreshold] = useState(45)
   const [moistureLog, setmoistureLog] = useState([])
-  
+  const [wateringLog, setWateringLog] = useState([])
+
   const switchMode = () => {
     setIsAuto(isAuto=>{return !isAuto})
     console.log(isAuto)
@@ -27,9 +28,17 @@ function App() {
   const clearmoistureLog = () =>{
     setmoistureLog([])
   }
+  const updateWateringeLog = (time, measurement) =>{
+    setWateringLog(moistureLog=>{return [...moistureLog,{"time":time,"measurement":measurement}]})
+  }
 
-  const moistureLogExtraction = useCallback(() =>{
+  const clearWateringLog = () =>{
+    setWateringLog([])
+  }
+
+  const dataExtraction = useCallback(() =>{
     clearmoistureLog()
+    clearWateringLog()
     const {InfluxDB} = require('@influxdata/influxdb-client')
 
     // You can generate a Token from the "Tokens Tab" in the UI
@@ -44,8 +53,11 @@ function App() {
     queryApi.queryRows(query, {
         next(row, tableMeta) {
         const o = tableMeta.toObject(row)
-        if(o._measurement=="Moisture"){
+        if(o._measurement==="Moisture"){
             updatemoistureLog(o._time,o._measurement,o._value)
+        }
+        else if(o._measurement==="Water pumped"){
+          updateWateringeLog(o._time,o._measurement)
         }
         // console.log(
         // `${o._time} ${o._measurement} in '${o.location}' (${o.example}): ${o._field}=${o._value}`
@@ -65,13 +77,13 @@ const [show, setShow] = useState(false)
 
 useEffect(()=>{
   console.log("extracting data from useEffect 1")
-  moistureLogExtraction();
+  dataExtraction();
 },[])
 
 useEffect(()=>{
   const timer = setTimeout(()=>{
     console.log("extracting data from useEffect 2")
-    moistureLogExtraction();
+    dataExtraction();
   },300000);
   return () => clearTimeout(timer)
 });
@@ -88,7 +100,7 @@ useEffect(()=>{
         <AlertModal onClose={() => setShow(false)} show={show} />
       {/* </div> */}
       <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={updateThreshold} />
-      <WateringLog />
+      <WateringLog wateringLog={wateringLog} />
       <MoistureChart moistureLog={moistureLog}></MoistureChart>
     </>
   );

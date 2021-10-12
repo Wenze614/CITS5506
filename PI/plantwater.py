@@ -4,11 +4,7 @@ from pump     import Pump
 from water    import Water
 from config   import Config
 import os
-
 import time
-import socket
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import asyncio
 
 if __name__ == "__main__":
     # Clean log file

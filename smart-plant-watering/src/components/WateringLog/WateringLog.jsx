@@ -6,10 +6,25 @@ const WateringLog = (props) => {
             <div className={styles.header}>
                 <h2>Watering Log</h2>
             </div>
-            <p>Water log content here</p>
-            <ul>
-                {props.wateringLog.map(log=><li key={log.time}>{`${log.time}  ${log.measurement}`}</li>)}
-            </ul>
+            <div className={styles.tableContainer}>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {props.wateringLog.map(log=>
+                            <tr key={log.time}>
+                                <td>{`${(log.date.slice(0,10))}`}</td>
+                                <td>{`${(log.date.slice(11))}`}</td>
+                            </tr>
+                            
+                        )}
+                    </tbody>
+                </table>
+            </div> 
         </div>
     );
 };

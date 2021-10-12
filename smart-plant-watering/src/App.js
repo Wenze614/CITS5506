@@ -29,7 +29,8 @@ function App() {
     setmoistureLog([])
   }
   const updateWateringeLog = (time, measurement) =>{
-    setWateringLog(moistureLog=>{return [...moistureLog,{"time":time,"measurement":measurement}]})
+    setWateringLog(moistureLog=>{return [...moistureLog,{"date": time.toLocaleDateString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }), "measurement":measurement}]})
+    console.log("time:" + time)
   }
 
   const clearWateringLog = () =>{

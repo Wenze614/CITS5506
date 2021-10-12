@@ -6,6 +6,9 @@ const MoistureChart = (props) =>{
 
     return(
         <div className={styles.chart_container}>
+            <div className={styles.header}>
+                <h2>Moisture Graph</h2>
+            </div>
             <Plot
                 data={[
                     {

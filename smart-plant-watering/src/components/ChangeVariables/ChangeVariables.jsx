@@ -43,7 +43,7 @@ const ChangeVariables = (props) => {
                     <div className={styles.header}>
                         <h2>Automatic Mode</h2>
                     </div>
-                    <h3>Water Moisture Threshold</h3>
+                    <h3>Water Moisture Threshold (%)</h3>
                     <form onSubmit={submitHandler}>
                         <input type="number" name="moistureThreshold" 
                             value={temp_threshold} 

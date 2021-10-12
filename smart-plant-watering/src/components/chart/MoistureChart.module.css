@@ -12,3 +12,22 @@
     align-items: center;
 }
 
+.header {
+    background-color: #74c69d;
+    border: #d8f3dc 1px solid;
+    border-radius: 5px;
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    top: -15px;
+    text-align: center;
+    padding: 5px;
+}
+
+.header h2 {
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #ffffff;
+}

@@ -1,0 +1,78 @@
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index:1;
+}
+
+.modalContent,
+.modalContentAlert {
+    width: 95%;
+    height: 120px;
+    background-color: #c0d6d9;
+    border: 2px solid #a8bcbf;
+    border-radius: 10px;
+}
+
+.modalContentAlert {
+    height: 140px;
+}
+
+.modalHeader,
+.modalHeaderAlert {
+    background-color: #c0d6d9;
+    border: 2px solid #a8bcbf;
+    border-radius: 5px;
+    position: relative;
+    width: 50%;
+    left: 25%;
+    top: -15px;
+    text-align: center;
+    padding: 5px;
+}
+
+.modalContentAlert,
+.modalHeaderAlert {
+    background-color: #fe8472;
+    border: 2px solid #fe6148;
+    color: #ffffff;
+}
+
+.modalHeader h2,
+.modalHeaderAlert h2 {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.modalBody p {
+    font-size: 18px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 1.2px;
+}
+
+.modalContentAlert .modalBody p {
+    margin: 8px 0;
+}
+
+.closeBtn {
+    background-color: inherit;
+    border: none;
+    position: relative;
+    float: right;
+    margin: 2px;
+}
+
+.modalContentAlert .closeBtn {
+    color: #ffffff;
+}

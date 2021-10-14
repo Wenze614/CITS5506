@@ -19,15 +19,10 @@ const ChangeVariables = (props) => {
     }
     const submitHandler = (event) =>{
         event.preventDefault();
-        const requestOptions = {
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify({measurement:'moisture_threshold',value:temp_threshold})
-        }
+
         if(isValid){
             props.updateThreshold(temp_threshold)
-            fetch("http://127.0.0.1:5000",requestOptions).then(response =>response.json())
-            .then(data => console.log(data))
+
         }else{
             setTemp_Threshold(props.threshold)
             setIsValid(true)

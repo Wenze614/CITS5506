@@ -8,14 +8,55 @@ import Header from './components/Header/Header';
 import AlertModal from './components/Modals/AlertModal';
 
 function App() {
+
+  // const mode_init = ()=>{
+  //   const requestOptions = {
+  //     method: 'GET',
+  //     headers: { 'Content-Type': 'application/json' }
+  //   }
+  //   fetch("http://127.0.0.1:5000/mode", requestOptions)
+  //     .then(response =>  {return response.json()})
+  //     .then(data =>{ 
+  //       console.log(data.value);
+  //       if(data.value=="AUTO"){
+  //         return true;
+  //       }else{
+  //         return false;
+  //       } })
+  // }
+
   const [isAuto, setIsAuto] = useState(true)
-  const [threshold, setThreshold] = useState(45)
+  const [threshold, setThreshold] = useState(40)
+
+  useEffect(() => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    }
+    fetch("http://127.0.0.1:5000/mode", requestOptions)
+      .then(response => { return response.json() })
+      .then(data => {
+        console.log(data.value);
+        if (data.value == "AUTO") {
+          setIsAuto(true)
+        } else {
+          setIsAuto(false)
+        }
+      })
+
+    fetch("http://127.0.0.1:5000/threshold", requestOptions)
+      .then(response => { return response.json() })
+      .then(data => {
+        console.log(data.value);
+        setThreshold(parseInt(data.value))
+      })
+  }, [])
+
   const [moistureLog, setmoistureLog] = useState([])
   const [wateringLog, setWateringLog] = useState([])
 
   const switchMode = () => {
     setIsAuto(isAuto => { return !isAuto })
-
     // console.log(isAuto)
   }
 
@@ -25,14 +66,28 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ measurement: 'mode', value: `${isAuto ? "AUTO" : "MANUAL"}` })
     }
-    fetch("http://127.0.0.1:5000", requestOptions).then(response => response.json())
+    fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
       .then(data => console.log(data))
   }, [isAuto])
+
+
 
   const updateThreshold = (new_threshold) => {
     // console.log("threshold updated to:" + new_threshold)
     setThreshold(new_threshold)
   }
+
+  useEffect(() => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ measurement: 'moisture_threshold', value: threshold})
+    }
+    fetch("http://127.0.0.1:5000",requestOptions).then(response =>response.json())
+    .then(data => console.log(data))
+
+  }, [threshold])
+
   const updatemoistureLog = (time, measurement, value) => {
     setmoistureLog(moistureLog => { return [...moistureLog, { "time": time, "measurement": measurement, "value": value }] })
   }

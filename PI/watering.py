@@ -4,7 +4,7 @@ from pump     import Pump
 from water    import Water
 from config   import Config
 import time
-
+import os
 class Watering:
     configmod = Config()
     water = Water()
@@ -28,6 +28,13 @@ class Watering:
     def water_once(self):
         self.pump.pump(self.configmod.WATERING_TIME)
     def start_watering(self):
+        try:
+            os.remove('moisture.log')
+            os.remove('water.log')
+            os.remove('pump.log')
+        except:
+            pass
+
         while True:
             self.configmod.__init__()
             if self.get_mode()=="MANUAL":

@@ -1,10 +1,13 @@
 import styles from "./ChangeVariables.module.css"
-import {useState} from "react"
+import {useEffect, useState} from "react"
 import WateringModal from "../Modals/WateringModal";
 
 const ChangeVariables = (props) => {
     
-    const [temp_threshold, setTemp_Threshold] = useState(props.threshold)
+    const [temp_threshold, setTemp_Threshold] = useState(0)
+    useEffect(()=>{
+        setTemp_Threshold(props.threshold)
+    },[props.threshold])
     const [isValid, setIsValid] = useState(true)
     const changeTemp_Threshold = (event) =>{
         if (event.target.value <=0 || event.target.value>60)

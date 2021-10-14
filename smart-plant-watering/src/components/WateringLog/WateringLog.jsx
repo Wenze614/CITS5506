@@ -16,7 +16,7 @@ const WateringLog = (props) => {
                     </thead>
                     <tbody>
                         {props.wateringLog.map(log=>
-                            <tr key={log.time}>
+                            <tr key={log.date}>
                                 <td>{`${(log.date.slice(0,10))}`}</td>
                                 <td>{`${(log.date.slice(11))}`}</td>
                             </tr>

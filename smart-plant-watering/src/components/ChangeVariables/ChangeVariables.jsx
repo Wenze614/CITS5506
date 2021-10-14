@@ -33,6 +33,16 @@ const ChangeVariables = (props) => {
     }
 
     const [show, setShow] = useState(false)
+    const waterNow = () =>{
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' }
+        }
+        fetch(`http://127.0.0.1:5000/water`, requestOptions)
+            .then(response => { return response.json() })
+            .then(data => {console.log(data)})
+        setShow(true)
+    }
 
     return (  
         <div>    
@@ -52,7 +62,7 @@ const ChangeVariables = (props) => {
                 </div>
             : 
                 <div className={styles.manualContainer}>
-                    <button className={styles.wateringButton} onClick={() => setShow(true)}>WATER NOW</button>
+                    <button className={styles.wateringButton} onClick={() => waterNow()}>WATER NOW</button>
                     <WateringModal onClose={() => setShow(false)} show={show} />
                 </div>
             }

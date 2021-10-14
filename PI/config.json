@@ -5,5 +5,6 @@
     "INFLUX_URL": "http://34.87.216.16:8086",
     "CLIENT": "CLIENT1",
     "WATERING_TIME": 1,
-    "MOISTRUE_THRESHOLD": 40
+    "MOISTRUE_THRESHOLD": 40,
+    "MODE":"AUTO"
 }

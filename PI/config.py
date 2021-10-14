@@ -7,6 +7,7 @@ class Config:
     CLIENT = "CLIENT1"
     WATERING_TIME = 1
     MOISTRUE_THRESHOLD = 40
+    MODE = "AUTO"
     def __init__(self):
         with open('config.json', 'r') as f:
             d = json.load(f)

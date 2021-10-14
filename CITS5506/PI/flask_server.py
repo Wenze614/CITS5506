@@ -18,7 +18,7 @@ import logging
 app = Flask(__name__)
 CORS(app)
 
-logger = logging.basicConfig(filename='record.log')
+#logger = logging.basicConfig(filename='record.log')
 
 @app.route("/", methods=['GET'])
 
@@ -53,7 +53,7 @@ def update():
     return 
 if __name__=='__main__':
     
-    t2 = threading.Thread(target = watering).start()
+    t2 = threading.Thread(target = water_test).start()
     #app.logger.info(f'Start Thread 1')
     t1 = threading.Thread(target = app.run(host='0.0.0.0',port=5000,debug = True) ).start()
     #app.logger.info(f'Start Thread 2')

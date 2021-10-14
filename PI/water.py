@@ -13,7 +13,7 @@ class Water:
         GPIO.setup(self.TRIGGER, GPIO.IN)
     
     def water_level(self):
-        ''' Use an for loop to check still have water in water container, to reduce the sensor error
+        ''' Use a for loop to check still have water in water container, to reduce the sensor error
         ''' 
         for i in range(0, 20):
             if GPIO.input(self.TRIGGER) == 1:

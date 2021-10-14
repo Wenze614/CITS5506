@@ -15,10 +15,10 @@ function App() {
 
   const switchMode = () => {
     setIsAuto(isAuto=>{return !isAuto})
-    console.log(isAuto)
+    // console.log(isAuto)
   }
   const updateThreshold = (new_threshold) =>{
-    console.log("threshold updated to:" + new_threshold)
+    // console.log("threshold updated to:" + new_threshold)
     setThreshold(new_threshold)
   }
   const updatemoistureLog = (time, measurement,value) =>{
@@ -29,8 +29,7 @@ function App() {
     setmoistureLog([])
   }
   const updateWateringeLog = (time, measurement) =>{
-    setWateringLog(moistureLog=>{return [...moistureLog,{"date": time.toLocaleDateString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }), "measurement":measurement}]})
-    console.log("time:" + time)
+    setWateringLog(moistureLog=>{return [...moistureLog,{"date": time.toLocaleDateString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true }), "measurement":measurement}]})  
   }
 
   const clearWateringLog = () =>{

@@ -10,97 +10,41 @@ import useFetchData from './hooks/useFetchData';
 
 function App() {
 
-  // const mode_init = ()=>{
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' }
-  //   }
-  //   fetch("http://127.0.0.1:5000/mode", requestOptions)
-  //     .then(response =>  {return response.json()})
-  //     .then(data =>{ 
-  //       console.log(data.value);
-  //       if(data.value=="AUTO"){
-  //         return true;
-  //       }else{
-  //         return false;
-  //       } })
-  // }
+  const [mode, setMode] = useState("AUTO")
+  const [threshold, setThreshold] = useState(45)
 
-  const [isAuto, setIsAuto] = useState(true)
-  const [threshold,setThreshold] = useState(45)
+  const update_mode = useCallback((value) => {
+    setMode(value)
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ measurement: 'mode', value:value})
+    }
+    fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
+      .then(data => console.log(data))
+  }, [])
 
-  const update_mode = useCallback((value) =>{
-    setIsAuto(value)
-  },[])
-  const update_threshold = useCallback((value) =>{
+  const update_threshold = useCallback((value) => {
     setThreshold(value)
-  },[])
-useFetchData('mode',update_mode)
-useFetchData('threshold',update_threshold)
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ measurement: 'moisture_threshold', value:value })
+    }
+    fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
+      .then(data => console.log(data))
+  }, [])
 
-useEffect(()=>{
-  console.log("isAuto: ",isAuto)
-  console.log("threshold: ",threshold)
-},[isAuto,threshold])
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: 'GET',
-  //     headers: { 'Content-Type': 'application/json' }
-  //   }
-  //   fetch("http://127.0.0.1:5000/mode", requestOptions)
-  //     .then(response => { return response.json() })
-  //     .then(data => {
-  //       console.log(data.value);
-  //       if (data.value == "AUTO") {
-  //         setIsAuto(true)
-  //       } else {
-  //         setIsAuto(false)
-  //       }
-  //     })
+  useFetchData('mode', update_mode)
+  useFetchData('threshold', update_threshold)
 
-  //   fetch("http://127.0.0.1:5000/threshold", requestOptions)
-  //     .then(response => { return response.json() })
-  //     .then(data => {
-  //       console.log(data.value);
-  //       setThreshold(parseInt(data.value))
-  //     })
-  // }, [])
+  useEffect(() => {
+    console.log("Mode: ", mode)
+    console.log("threshold: ", threshold)
+  }, [mode, threshold])
 
   const [moistureLog, setmoistureLog] = useState([])
   const [wateringLog, setWateringLog] = useState([])
-
-  // const switchMode = () => {
-  //   setIsAuto(isAuto => { return !isAuto })
-  //   // console.log(isAuto)
-  // }
-
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ measurement: 'mode', value: `${isAuto ? "AUTO" : "MANUAL"}` })
-  //   }
-  //   fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
-  //     .then(data => console.log(data))
-  // }, [isAuto])
-
-
-
-  // const updateThreshold = (new_threshold) => {
-  //   // console.log("threshold updated to:" + new_threshold)
-  //   setThreshold(new_threshold)
-  // }
-
-  // useEffect(() => {
-  //   const requestOptions = {
-  //     method: 'POST',
-  //     headers: { 'Content-Type': 'application/json' },
-  //     body: JSON.stringify({ measurement: 'moisture_threshold', value: threshold})
-  //   }
-  //   fetch("http://127.0.0.1:5000",requestOptions).then(response =>response.json())
-  //   .then(data => console.log(data))
-
-  // }, [threshold])
 
   const updatemoistureLog = (time, measurement, value) => {
     setmoistureLog(moistureLog => { return [...moistureLog, { "time": time, "measurement": measurement, "value": value }] })
@@ -175,12 +119,12 @@ useEffect(()=>{
   return (
     <>
       <Header />
-      <SwitchButton isAuto={isAuto} switchMode={update_mode} />
+      <SwitchButton mode={mode} update_mode={update_mode} />
       {/* <div> */}
       <button onClick={() => setShow(true)}>Show alert modal</button>
       <AlertModal onClose={() => setShow(false)} show={show} />
       {/* </div> */}
-      <ChangeVariables isAuto={isAuto} threshold={threshold} updateThreshold={update_threshold} />
+      <ChangeVariables mode={mode} threshold={threshold} updateThreshold={update_threshold} />
       <WateringLog wateringLog={wateringLog.reverse().slice(0, 10)} />
       <MoistureChart moistureLog={moistureLog}></MoistureChart>
     </>

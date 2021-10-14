@@ -11,11 +11,7 @@ const useFetchData = (type,applyData) => {
             .then(data => {
                 if(type==="mode"){
                     console.log("fetching mode: ",data.value)
-                    if (data.value === "AUTO") {
-                        applyData(true)
-                      } else {
-                        applyData(false)
-                      }
+                    applyData(data.value)
                 }else if(type==="threshold"){
                     console.log("fetching threshold: ",data.value)
                     applyData(parseInt(data.value))

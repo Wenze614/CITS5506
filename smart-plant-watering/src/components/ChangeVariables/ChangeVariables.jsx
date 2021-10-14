@@ -36,7 +36,7 @@ const ChangeVariables = (props) => {
 
     return (  
         <div>    
-            { props.isAuto? 
+            { props.mode==="AUTO"? 
                 <div className={styles.autoContainer}>
                     <div className={styles.header}>
                         <h2>Automatic Mode</h2>

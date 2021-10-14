@@ -1,52 +1,27 @@
 from flask import Flask,request, jsonify
 from flask_cors import CORS
-from moisture import Moisture
-from influx   import Influx
-from pump     import Pump
-from water    import Water
+#from moisture import Moisture
+#from influx   import Influx
+#from pump     import Pump
+#from water    import Water
 from config   import Config
 import extra
-from extra import get_MOISTRUE_THRESHOLD
+from extra import get_MOISTRUE_THRESHOLD,water_test,watering
 import os
 import time
-
+import webbrowser
+import threading
+import logging
+#import subprocess
 
 
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/", methods=['GET'])
-def watering():
-    watering_auto = True
-    
-    while watering_auto == True:
-        water = Water()
-        moisture = Moisture(channel=1)
-        influx = Influx()
-        pump = Pump()
-        configmod = Config()
-        MOISTURE_THRESHOLD = get_MOISTRUE_THRESHOLD()
-        print(MOISTURE_THRESHOLD)
-        #try:
-        data, _time = moisture.get_moisture()
-        print('Moisture', data)
-        influx.send_moisture(data, _time)
-        have_water = water.water_level()
-        print('Have water', have_water)
-        if have_water and data < MOISTURE_THRESHOLD:
-            pump.pump(configmod.WATERING_TIME)
-            influx.send_pumped(1.0, _time)
-        else:
-            influx.send_pumped(0.0, _time)
+logger = logging.basicConfig(filename='record.log')
 
-        if have_water:
-            influx.send_water_level(1.0, _time)
-        else:
-            influx.send_water_level(0.0, _time)
-        time.sleep(10)
-        #except Exception as e:
-        #   time.sleep(10)
-        #   print(e)
+@app.route("/", methods=['GET'])
+
 
     
 
@@ -77,4 +52,12 @@ def update():
         return jsonify(response)
     return 
 if __name__=='__main__':
-    app.run(host='0.0.0.0',port=5000,debug = True)
+    
+    t2 = threading.Thread(target = watering).start()
+    #app.logger.info(f'Start Thread 1')
+    t1 = threading.Thread(target = app.run(host='0.0.0.0',port=5000,debug = True) ).start()
+    #app.logger.info(f'Start Thread 2')
+    
+    #app.run(host='127.0.0.1',port=5000,debug = True)
+    
+    

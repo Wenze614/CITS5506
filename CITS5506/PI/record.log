@@ -1,0 +1,47 @@
+INFO:flask_server:Start Thread 2
+INFO:flask_server:Start Thread 1
+INFO:flask_server:Start Thread 2
+INFO:flask_server:Start Thread 1
+INFO:werkzeug: * Restarting with stat
+INFO:flask_server:Start Thread 1
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:127.0.0.1 - - [14/Oct/2021 17:59:12] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Oct/2021 17:59:19] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [14/Oct/2021 17:59:20] "GET / HTTP/1.1" 200 -
+INFO:flask_server:Start Thread 2
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+INFO:werkzeug: * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://10.19.25.45:5000/ (Press CTRL+C to quit)
+INFO:werkzeug:10.19.25.45 - - [14/Oct/2021 18:04:27] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.19.25.45 - - [14/Oct/2021 18:04:34] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.19.25.45 - - [14/Oct/2021 18:04:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.19.25.45 - - [14/Oct/2021 18:04:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug:10.19.25.45 - - [14/Oct/2021 18:04:35] "GET / HTTP/1.1" 200 -
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://10.19.25.45:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Detected change in 'C:\\Users\\tally\\Documents\\GitHub\\CITS5506\\CITS5506\\PI\\flask_server.py', reloading
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://10.19.25.45:5000/ (Press CTRL+C to quit)
+INFO:werkzeug: * Restarting with stat
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 531-099-906
+WARNING:werkzeug: * Running on all addresses.
+   WARNING: This is a development server. Do not use it in a production deployment.
+INFO:werkzeug: * Running on http://10.19.25.45:5000/ (Press CTRL+C to quit)

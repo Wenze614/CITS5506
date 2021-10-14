@@ -2,7 +2,6 @@ from flask import Flask,request
 from flask_cors import CORS
 from watering import Watering
 from multiprocessing import Process, Value
-import time
 
 import time
 
@@ -22,6 +21,15 @@ def get_threshold():
         'value':water.get_threshold()
     }
     return response,200
+
+@app.route('/water',methods=["GET"])
+def water_now():
+    water.water_once()
+    response = {
+        'value':"successfully watered"
+    }
+    return response, 200
+
 
 @app.route('/',methods=["POST"])
 def update():

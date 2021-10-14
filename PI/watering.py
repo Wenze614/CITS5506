@@ -32,7 +32,6 @@ class Watering:
             self.configmod.__init__()
             if self.get_mode()=="MANUAL":
                 print("it's manual mode now")
-                time.sleep(3)
             else:
                 print(f"threshold is: {self.get_threshold()}")
                 try:
@@ -51,5 +50,5 @@ class Watering:
                     else:
                         self.influx.send_water_level(0.0, _time)
                 except Exception as e:
-                    time.sleep(10)
                     print(e)
+            time.sleep(3)

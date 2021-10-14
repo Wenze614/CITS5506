@@ -1,9 +1,9 @@
 from flask import Flask,request, jsonify
 from flask_cors import CORS
-#from moisture import Moisture
-#from influx   import Influx
-#from pump     import Pump
-#from water    import Water
+from moisture import Moisture
+from influx   import Influx
+from pump     import Pump
+from water    import Water
 from config   import Config
 import extra
 from extra import get_MOISTRUE_THRESHOLD,water_test,watering
@@ -53,7 +53,7 @@ def update():
     return 
 if __name__=='__main__':
     
-    t2 = threading.Thread(target = water_test).start()
+    t2 = threading.Thread(target = watering).start()
     #app.logger.info(f'Start Thread 1')
     t1 = threading.Thread(target = app.run(host='0.0.0.0',port=5000,debug = True) ).start()
     #app.logger.info(f'Start Thread 2')

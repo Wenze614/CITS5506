@@ -18,7 +18,7 @@ class Config:
             self.CLIENT        = d['CLIENT']
             self.WATERING_TIME = d['WATERING_TIME']
             self.MOISTRUE_THRESHOLD = d['MOISTRUE_THRESHOLD']
-    
+            self.MODE = d['MODE']
     def update_INFLUX_TOKEN(self, TOKEN):
         d={}
         with open('config.json', 'r') as f:
@@ -80,6 +80,7 @@ class Config:
             f.close()
     
     def update_MOISTRUE_THRESHOLD(self, THRESHOLD):
+        self.MOISTRUE_THRESHOLD = THRESHOLD
         d={}
         with open('config.json', 'r') as f:
             d = json.load(f)
@@ -88,3 +89,25 @@ class Config:
         with open('config.json', 'w+') as f:
             json.dump(d, f)
             f.close()
+        return self.MOISTRUE_THRESHOLD
+
+    def get_threshold(self):
+        return self.MOISTRUE_THRESHOLD
+
+    def update_MODE(self,MODE):
+        self.MODE = MODE
+        d={}
+        with open('config.json', 'r') as f:
+            d = json.load(f)
+            d["MODE"]=MODE
+            f.close()
+        with open('config.json', 'w+') as f:
+            json.dump(d, f)
+            f.close()
+        return self.MODE
+        
+    def get_MODE(self):
+        return self.MODE
+    
+
+    

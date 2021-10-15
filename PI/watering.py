@@ -26,7 +26,14 @@ class Watering:
     def get_mode(self):
         return self.configmod.get_MODE()
     def water_once(self):
-        self.pump.pump(self.configmod.WATERING_TIME)
+        have_water = self.water.water_level()
+        #if have water and moisture is lower than threshold, then pump water
+        data,_time = self.moisture.get_moisture()
+        if have_water :
+            self.pump.pump(self.configmod.WATERING_TIME)
+            self.influx.send_pumped(1.0, _time)
+        else:
+            self.influx.send_pumped(0.0, _time)
     def start_watering(self):
         try:
             os.remove('moisture.log')
@@ -38,6 +45,13 @@ class Watering:
         while True:
             self.configmod.__init__()
             if self.get_mode()=="MANUAL":
+                data, _time = self.moisture.get_moisture()
+                self.influx.send_moisture(data, _time)
+                have_water = self.water.water_level()
+                if have_water:
+                    self.influx.send_water_level(1.0, _time)
+                else:
+                    self.influx.send_water_level(0.0, _time)
                 print("it's manual mode now")
             else:
                 print(f"threshold is: {self.get_threshold()}")

@@ -16,6 +16,10 @@ const useFetchData = (type,applyData) => {
                     console.log("fetching threshold: ",data.value)
                     applyData(parseInt(data.value))
                 }
+                else if(type==="water_level"){
+                    console.log("water level",data.value)
+                    applyData(data.value)
+                }
             })
     }, [type,applyData])
 

@@ -1,0 +1,98 @@
+.autoContainer {
+    background-color: #ffffff;
+    width: 90%;
+    height: 130px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 20px 35px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.header {
+    background-color: #74c69d;
+    border: #d8f3dc 1px solid;
+    border-radius: 5px;
+    position: absolute;
+    width: 60%;
+    left: 20%;
+    top: -15px;
+    text-align: center;
+    padding: 5px;
+}
+
+.header h2 {
+    font-size: 18px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    margin: 0;
+    color: #ffffff;
+}
+
+h3 {
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+    text-transform: uppercase;
+}
+
+.inputBox {
+    width: 63%;
+    padding: 10px 5px;
+    background-color: #eeeeee;
+    border: none;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-right: 5px;
+    outline: none;
+}
+
+.inputBox:focus{
+    border-color: #74c69d;
+    border-style: solid;
+    background-color: #dcf5e9;
+}
+
+.inputBox.invalid:focus{
+    border-color: red;
+    border-style: solid;
+    background-color: #f8e8e5;
+}
+
+.btn {
+    background-color: #d8f3dc;
+    border-radius: 5px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+    width: 35%;
+    color: rgb(110,110,110);
+    cursor: pointer;
+}
+
+.manualContainer{
+    background-color: transparent;
+}
+
+.wateringButton{
+    background-color: #A8BCBF;
+    border: none;
+    outline: 2px solid #C0D6D9;
+    outline-offset: -5px;
+    border-radius: 50%;
+    width: 125px;
+    height: 125px;
+    color: white;
+    cursor: pointer;
+    margin: 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}

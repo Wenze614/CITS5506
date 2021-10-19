@@ -20,7 +20,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ measurement: 'mode', value:value})
     }
-    fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
+    fetch("http://172.20.10.8:5000/", requestOptions).then(response => { return response.json() })
       .then(data => console.log(data))
   }, [])
 
@@ -31,7 +31,7 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ measurement: 'moisture_threshold', value:value })
     }
-    fetch("http://127.0.0.1:5000", requestOptions).then(response => { return response.json() })
+    fetch("http://172.20.10.8:5000/", requestOptions).then(response => { return response.json() })
       .then(data => console.log(data))
   }, [])
 

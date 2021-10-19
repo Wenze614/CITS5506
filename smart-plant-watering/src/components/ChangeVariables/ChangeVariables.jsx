@@ -38,7 +38,7 @@ const ChangeVariables = (props) => {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         }
-        fetch(`http://127.0.0.1:5000/water`, requestOptions)
+        fetch(`http://172.20.10.8:5000/water`, requestOptions)
             .then(response => { return response.json() })
             .then(data => {console.log(data)})
         setShow(true)
